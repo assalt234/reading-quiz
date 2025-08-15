@@ -1,0 +1,684 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Oman Reading Adventures</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap');
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            line-height: 1.7;
+            min-height: 100vh;
+        }
+        
+        .main-container {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-radius: 25px;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            overflow: hidden;
+        }
+        
+        .story-section {
+            background: linear-gradient(135deg, #f0f8ff 0%, #e6f3ff 100%);
+            border: 3px solid #4facfe;
+            border-radius: 20px;
+            padding: 30px;
+            margin: 25px 0;
+            box-shadow: 0 10px 30px rgba(79, 172, 254, 0.1);
+        }
+        
+        .question-card {
+            background: linear-gradient(135deg, #fff7ed 0%, #fef3c7 50%, #fff7ed 100%);
+            border: 3px solid #f59e0b;
+            border-radius: 18px;
+            padding: 25px;
+            margin: 20px 0;
+            transition: all 0.4s ease;
+            box-shadow: 0 8px 25px rgba(245, 158, 11, 0.1);
+        }
+        
+        .question-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(245, 158, 11, 0.2);
+        }
+        
+        .option-button {
+            display: block;
+            width: 100%;
+            padding: 16px 20px;
+            margin: 12px 0;
+            background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+            border: 2px solid #e2e8f0;
+            border-radius: 15px;
+            text-align: left;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 16px;
+            font-weight: 500;
+            position: relative;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+        }
+        
+        .option-button:hover {
+            border-color: #3b82f6;
+            background: linear-gradient(135deg, #dbeafe 0%, #eff6ff 100%);
+            transform: translateX(8px) translateY(-2px);
+            box-shadow: 0 8px 25px rgba(59, 130, 246, 0.15);
+        }
+        
+        .option-button.selected {
+            background: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 100%);
+            border-color: #2563eb;
+            font-weight: 600;
+            box-shadow: 0 8px 25px rgba(37, 99, 235, 0.2);
+            transform: translateX(5px);
+        }
+        
+        .option-button.correct {
+            background: linear-gradient(135deg, #dcfce7 0%, #bbf7d0 100%);
+            border-color: #16a34a;
+            color: #15803d;
+            font-weight: 600;
+        }
+        
+        .option-button.incorrect {
+            background: linear-gradient(135deg, #fef2f2 0%, #fecaca 100%);
+            border-color: #dc2626;
+            color: #dc2626;
+            font-weight: 600;
+        }
+        
+        .big-button {
+            background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 50%, #ec4899 100%);
+            color: white;
+            padding: 18px 40px;
+            border: none;
+            border-radius: 50px;
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(79, 70, 229, 0.4);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .big-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s;
+        }
+        
+        .big-button:hover:not(:disabled)::before {
+            left: 100%;
+        }
+        
+        .big-button:hover:not(:disabled) {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(79, 70, 229, 0.5);
+        }
+        
+        .big-button:disabled {
+            opacity: 0.7;
+            cursor: not-allowed;
+            transform: none;
+        }
+        
+        .story-card {
+            background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: all 0.4s ease;
+            cursor: pointer;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+        }
+        
+        .story-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.2);
+            border-color: rgba(79, 70, 229, 0.3);
+        }
+        
+        .nav-button {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 30px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin: 0 8px;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .nav-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+        
+        .floating-score {
+            background: linear-gradient(135deg, #10b981 0%, #059669 50%, #047857 100%);
+            color: white;
+            padding: 20px 30px;
+            border-radius: 25px;
+            text-align: center;
+            margin: 25px 0;
+            box-shadow: 0 15px 35px rgba(16, 185, 129, 0.3);
+        }
+        
+        .word-help {
+            background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+            border: 2px solid #f59e0b;
+            border-radius: 15px;
+            padding: 15px 20px;
+            margin: 15px 0;
+            font-size: 15px;
+            box-shadow: 0 6px 20px rgba(245, 158, 11, 0.1);
+        }
+        
+        .reading-speed {
+            font-size: 19px;
+            line-height: 1.9;
+            font-weight: 400;
+        }
+        
+        .simple-text {
+            font-size: 17px;
+            color: #4a5568;
+            font-weight: 400;
+        }
+
+        /* Animation classes for smooth transitions */
+        .fade-out {
+            opacity: 0;
+            transform: translateY(-10px);
+            transition: all 0.5s ease;
+        }
+
+        .fade-in {
+            opacity: 1;
+            transform: translateY(0);
+            transition: all 0.5s ease;
+        }
+
+        .slide-out-left {
+            transform: translateX(-100%);
+            opacity: 0;
+            transition: all 0.4s ease;
+        }
+
+        .slide-in-right {
+            transform: translateX(0);
+            opacity: 1;
+            transition: all 0.4s ease;
+        }
+        
+        @media (max-width: 768px) {
+            .main-container {
+                margin: 10px;
+                border-radius: 15px;
+            }
+            
+            .reading-speed {
+                font-size: 16px;
+            }
+        }
+    </style>
+</head>
+<body class="min-h-screen p-4">
+
+    <!-- Header -->
+    <div class="text-center mb-8">
+        <h1 class="text-5xl md:text-6xl font-bold bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 bg-clip-text text-transparent mb-4">
+            🇴🇲 Oman Stories
+        </h1>
+        <p class="text-xl text-white font-medium">Read and Learn About Beautiful Oman</p>
+    </div>
+
+    <!-- Navigation (hidden initially) -->
+    <div id="quiz-nav" class="text-center mb-6 hidden">
+        <button id="home-btn" class="nav-button bg-gray-500 text-white hover:bg-gray-600">🏠 Home</button>
+        <button id="nizwa-btn" class="nav-button bg-purple-500 text-white hover:bg-purple-600">🏰 Fort</button>
+        <button id="desert-btn" class="nav-button bg-yellow-500 text-white hover:bg-yellow-600">🏜️ Desert</button>
+        <button id="mosque-btn" class="nav-button bg-blue-500 text-white hover:bg-blue-600">🕌 Mosque</button>
+    </div>
+
+    <div class="max-w-4xl mx-auto">
+
+        <!-- Home Page -->
+        <div id="home-page" class="main-container p-10">
+            <div class="text-center mb-10">
+                <h2 class="text-4xl font-bold bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent mb-6">
+                    Choose Your Story Adventure!
+                </h2>
+                <p class="text-lg text-gray-600 font-medium">Click on a card to begin your journey</p>
+            </div>
+            
+            <div id="story-choices" class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Nizwa Fort -->
+                <div id="start-nizwa" class="story-card">
+                    <div class="h-48 bg-gradient-to-br from-purple-400 via-purple-500 to-purple-600 flex items-center justify-center relative overflow-hidden">
+                        <div class="absolute inset-0 bg-black opacity-10"></div>
+                        <span class="text-7xl relative z-10">🏰</span>
+                    </div>
+                    <div class="p-7">
+                        <h3 class="text-2xl font-bold text-purple-700 mb-4">Nizwa Fort</h3>
+                        <p class="simple-text text-gray-600 mb-6 leading-relaxed">Discover the secrets of an ancient fortress that protected Oman for centuries.</p>
+                        <button class="w-full bg-gradient-to-r from-purple-500 to-purple-600 text-white py-3 px-6 rounded-full font-semibold hover:from-purple-600 hover:to-purple-700 transition-all duration-300 transform hover:scale-105 shadow-lg">
+                            ✨ Start Adventure
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Desert -->
+                <div id="start-desert" class="story-card">
+                    <div class="h-48 bg-gradient-to-br from-yellow-400 via-orange-400 to-orange-500 flex items-center justify-center relative overflow-hidden">
+                        <div class="absolute inset-0 bg-black opacity-10"></div>
+                        <span class="text-7xl relative z-10">🏜️</span>
+                    </div>
+                    <div class="p-7">
+                        <h3 class="text-2xl font-bold text-orange-700 mb-4">Wahiba Desert</h3>
+                        <p class="simple-text text-gray-600 mb-6 leading-relaxed">Journey through golden dunes and meet the desert's friendly inhabitants.</p>
+                        <button class="w-full bg-gradient-to-r from-orange-500 to-yellow-500 text-white py-3 px-6 rounded-full font-semibold hover:from-orange-600 hover:to-yellow-600 transition-all duration-300 transform hover:scale-105 shadow-lg">
+                            🌟 Start Adventure
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Grand Mosque -->
+                <div id="start-mosque" class="story-card">
+                    <div class="h-48 bg-gradient-to-br from-blue-400 via-blue-500 to-indigo-600 flex items-center justify-center relative overflow-hidden">
+                        <div class="absolute inset-0 bg-black opacity-10"></div>
+                        <span class="text-7xl relative z-10">🕌</span>
+                    </div>
+                    <div class="p-7">
+                        <h3 class="text-2xl font-bold text-blue-700 mb-4">Grand Mosque</h3>
+                        <p class="simple-text text-gray-600 mb-6 leading-relaxed">Explore the magnificent architecture of Muscat's most beautiful mosque.</p>
+                        <button class="w-full bg-gradient-to-r from-blue-500 to-indigo-600 text-white py-3 px-6 rounded-full font-semibold hover:from-blue-600 hover:to-indigo-700 transition-all duration-300 transform hover:scale-105 shadow-lg">
+                            💫 Start Adventure
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Quiz Container -->
+        <div id="quiz-container" class="main-container p-8 hidden">
+            <h2 id="story-title" class="text-3xl font-bold text-center text-green-600 mb-6"></h2>
+
+            <!-- Story Section -->
+            <div id="story-display" class="story-section">
+                <h3 class="text-2xl font-bold text-green-700 mb-4">📖 Read the Story</h3>
+                <div class="word-help">
+                    <strong>💡 Tip:</strong> Read slowly. If you don't know a word, try to guess from the story!
+                </div>
+                <div id="story-content" class="reading-speed text-gray-700">
+                    <!-- Story content will be added here -->
+                </div>
+                
+                <!-- Continue Button after reading -->
+                <div class="text-center mt-6">
+                    <button id="continue-to-quiz" class="big-button">
+                        ✨ Continue to Quiz
+                    </button>
+                </div>
+            </div>
+
+            <!-- Questions Section (hidden initially) -->
+            <div id="questions-section" class="hidden">
+                <!-- Questions will be added here -->
+            </div>
+
+            <!-- Submit Button (hidden initially) -->
+            <div id="submit-section" class="text-center mt-8 hidden">
+                <button id="submit-btn" class="big-button">
+                    ✅ Check My Answers
+                </button>
+            </div>
+
+            <!-- Results -->
+            <div id="results" class="text-center mt-8 hidden">
+                <div class="floating-score">
+                    <h3 class="text-2xl font-bold">Your Score: <span id="score"></span></h3>
+                    <p id="feedback" class="text-lg mt-2"></p>
+                </div>
+                <button id="try-another" class="nav-button bg-green-500 text-white hover:bg-green-600 mt-4">
+                    🔄 Try Another Story
+                </button>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        // Quiz data with simpler language for 4th graders
+        const stories = {
+            nizwa: {
+                title: "🏰 The Big Fort in Nizwa",
+                story: `
+                    <p class="mb-4"><strong>Ahmed</strong> went to <strong>Nizwa Fort</strong> with his dad. The fort is very old and very big. It has thick walls to keep people safe long ago.</p>
+                    
+                    <p class="mb-4">They walked up the stairs to the top. From up there, Ahmed could see the whole city! He saw green trees, houses, and the old market called the <strong>souq</strong>.</p>
+                    
+                    <p class="mb-4">At the top, there were big <strong>cannons</strong> - old guns that were used to protect the city. Ahmed's dad told him that people built this fort about 400 years ago to keep their families safe.</p>
+                    
+                    <p>In the souq, they bought dates and a small <strong>khanjar</strong> (a special curved knife) to remember their visit. Ahmed learned that Nizwa was once the capital city of Oman!</p>
+                `,
+                questions: [
+                    {
+                        text: "Who did Ahmed visit the fort with?",
+                        options: ["His dad", "His mom", "His friend", "His teacher"],
+                        correct: 0
+                    },
+                    {
+                        text: "What could Ahmed see from the top of the fort?",
+                        options: ["Only the desert", "The whole city", "Just the parking lot", "The sea"],
+                        correct: 1
+                    },
+                    {
+                        text: "What are cannons?",
+                        options: ["New cars", "Old guns", "Big books", "Small toys"],
+                        correct: 1
+                    },
+                    {
+                        text: "How old is the fort?",
+                        options: ["50 years old", "100 years old", "About 400 years old", "10 years old"],
+                        correct: 2
+                    },
+                    {
+                        text: "What is a khanjar?",
+                        options: ["A type of food", "A special curved knife", "A big cannon", "A prayer book"],
+                        correct: 1
+                    }
+                ]
+            },
+            desert: {
+                title: "🏜️ Fun in the Desert",
+                story: `
+                    <p class="mb-4"><strong>Sara</strong> and her family went to the <strong>Wahiba Desert</strong>. The desert has big hills made of golden sand called <strong>dunes</strong>.</p>
+                    
+                    <p class="mb-4">They rode in a big car that could drive on sand. The car went up and down the sand hills like a fun ride! Sara laughed as they bounced around.</p>
+                    
+                    <p class="mb-4">When the sun went down, the sky turned beautiful colors - orange, pink, and purple. They met a <strong>Bedouin family</strong> who live in the desert. They shared tea and told stories.</p>
+                    
+                    <p>At night, Sara looked up at the stars. In the desert, you can see so many stars! The Bedouin family showed them their <strong>camels</strong> and gave them fresh bread and sweet dates to eat.</p>
+                `,
+                questions: [
+                    {
+                        text: "What are dunes made of?",
+                        options: ["Rocks", "Golden sand", "Water", "Grass"],
+                        correct: 1
+                    },
+                    {
+                        text: "How did Sara feel riding in the car?",
+                        options: ["Scared", "Bored", "Happy and laughing", "Sleepy"],
+                        correct: 2
+                    },
+                    {
+                        text: "What colors did the sky turn at sunset?",
+                        options: ["Green and blue", "Black and white", "Orange, pink, and purple", "Yellow and red"],
+                        correct: 2
+                    },
+                    {
+                        text: "Who are Bedouins?",
+                        options: ["People who live in cities", "People who live in the desert", "People who work in schools", "People who drive cars"],
+                        correct: 1
+                    },
+                    {
+                        text: "What animals did the Bedouin family have?",
+                        options: ["Horses", "Cows", "Camels", "Dogs"],
+                        correct: 2
+                    }
+                ]
+            },
+            mosque: {
+                title: "🕌 The Beautiful Big Mosque",
+                story: `
+                    <p class="mb-4"><strong>Layla's</strong> class visited the <strong>Sultan Qaboos Grand Mosque</strong> in Muscat. It is a very big and beautiful building with <strong>five tall towers</strong>.</p>
+                    
+                    <p class="mb-4">Inside, there was a huge <strong>carpet</strong> on the floor. The carpet was so big that it took many women almost four years to make it! Above their heads was a giant <strong>chandelier</strong> with hundreds of bright lights.</p>
+                    
+                    <p class="mb-4">Outside the mosque, there was a pretty garden with colorful flowers. Everything was very quiet and peaceful. People come here to pray and think about God.</p>
+                    
+                    <p>Layla learned that the heavy chandelier was made in Germany and brought to Oman. She was amazed by how beautiful and clean everything was in this special place.</p>
+                `,
+                questions: [
+                    {
+                        text: "How many tall towers does the mosque have?",
+                        options: ["Three", "Five", "Seven", "Ten"],
+                        correct: 1
+                    },
+                    {
+                        text: "How long did it take to make the big carpet?",
+                        options: ["One year", "Two years", "Almost four years", "Six months"],
+                        correct: 2
+                    },
+                    {
+                        text: "What is a chandelier?",
+                        options: ["A big carpet", "A tall tower", "A bright light with crystals", "A type of flower"],
+                        correct: 2
+                    },
+                    {
+                        text: "Where was the chandelier made?",
+                        options: ["Oman", "Germany", "India", "America"],
+                        correct: 1
+                    },
+                    {
+                        text: "What do people do at the mosque?",
+                        options: ["Play games", "Buy food", "Pray and think about God", "Watch movies"],
+                        correct: 2
+                    }
+                ]
+            }
+        };
+
+        // JavaScript functionality
+        document.addEventListener('DOMContentLoaded', () => {
+            const homePage = document.getElementById('home-page');
+            const quizContainer = document.getElementById('quiz-container');
+            const quizNav = document.getElementById('quiz-nav');
+            const storyTitle = document.getElementById('story-title');
+            const storyContent = document.getElementById('story-content');
+            const storyDisplay = document.getElementById('story-display');
+            const questionsSection = document.getElementById('questions-section');
+            const submitSection = document.getElementById('submit-section');
+            const continueBtn = document.getElementById('continue-to-quiz');
+            const submitBtn = document.getElementById('submit-btn');
+            const results = document.getElementById('results');
+            const score = document.getElementById('score');
+            const feedback = document.getElementById('feedback');
+            const tryAnotherBtn = document.getElementById('try-another');
+
+            let currentStory = '';
+
+            function showHome() {
+                homePage.classList.remove('hidden');
+                quizContainer.classList.add('hidden');
+                quizNav.classList.add('hidden');
+                
+                // Reset all sections
+                storyDisplay.classList.remove('hidden');
+                questionsSection.classList.add('hidden');
+                submitSection.classList.add('hidden');
+                results.classList.add('hidden');
+            }
+
+            function showStory(storyKey) {
+                currentStory = storyKey;
+                const story = stories[storyKey];
+                
+                // Hide home page and show quiz container
+                homePage.classList.add('hidden');
+                quizContainer.classList.remove('hidden');
+                quizNav.classList.remove('hidden');
+                
+                // Show only the story section initially
+                storyDisplay.classList.remove('hidden');
+                questionsSection.classList.add('hidden');
+                submitSection.classList.add('hidden');
+                results.classList.add('hidden');
+                
+                storyTitle.textContent = story.title;
+                storyContent.innerHTML = story.story;
+                
+                // Prepare questions but keep them hidden
+                questionsSection.innerHTML = '';
+                story.questions.forEach((q, index) => {
+                    const questionDiv = document.createElement('div');
+                    questionDiv.className = 'question-card';
+                    
+                    let optionsHtml = '';
+                    q.options.forEach((option, optIndex) => {
+                        optionsHtml += `
+                            <button class="option-button" data-question="${index}" data-option="${optIndex}">
+                                ${String.fromCharCode(65 + optIndex)}) ${option}
+                            </button>
+                        `;
+                    });
+                    
+                    questionDiv.innerHTML = `
+                        <h4 class="text-xl font-bold text-amber-700 mb-5 flex items-center">
+                            <span class="bg-amber-100 text-amber-700 rounded-full w-8 h-8 flex items-center justify-center mr-3 font-bold">
+                                ${index + 1}
+                            </span>
+                            ${q.text}
+                        </h4>
+                        ${optionsHtml}
+                    `;
+                    
+                    questionsSection.appendChild(questionDiv);
+                });
+                
+                // Reset submit button
+                submitBtn.disabled = false;
+                submitBtn.textContent = '✅ Check My Answers';
+            }
+
+            function showQuestions() {
+                // Hide story section with animation
+                storyDisplay.classList.add('fade-out');
+                
+                setTimeout(() => {
+                    storyDisplay.classList.add('hidden');
+                    storyDisplay.classList.remove('fade-out');
+                    
+                    // Show questions section with animation
+                    questionsSection.classList.remove('hidden');
+                    questionsSection.classList.add('fade-in');
+                    submitSection.classList.remove('hidden');
+                    submitSection.classList.add('fade-in');
+                    
+                    // Scroll to top of questions
+                    questionsSection.scrollIntoView({ behavior: 'smooth' });
+                }, 300);
+            }
+
+            // Event listeners for navigation
+            document.getElementById('home-btn').addEventListener('click', showHome);
+            document.getElementById('nizwa-btn').addEventListener('click', () => showStory('nizwa'));
+            document.getElementById('desert-btn').addEventListener('click', () => showStory('desert'));
+            document.getElementById('mosque-btn').addEventListener('click', () => showStory('mosque'));
+
+            // Event listeners for home page cards
+            document.getElementById('start-nizwa').addEventListener('click', () => showStory('nizwa'));
+            document.getElementById('start-desert').addEventListener('click', () => showStory('desert'));
+            document.getElementById('start-mosque').addEventListener('click', () => showStory('mosque'));
+
+            // Continue to quiz button
+            continueBtn.addEventListener('click', showQuestions);
+
+            // Try another story button
+            tryAnotherBtn.addEventListener('click', showHome);
+
+            // Handle option selection
+            document.addEventListener('click', (e) => {
+                if (e.target.classList.contains('option-button')) {
+                    const questionIndex = e.target.dataset.question;
+                    const buttons = document.querySelectorAll(`[data-question="${questionIndex}"]`);
+                    
+                    buttons.forEach(btn => btn.classList.remove('selected'));
+                    e.target.classList.add('selected');
+                }
+            });
+
+            // Handle submit
+            submitBtn.addEventListener('click', () => {
+                const story = stories[currentStory];
+                let correctAnswers = 0;
+                let allAnswered = true;
+
+                story.questions.forEach((q, index) => {
+                    const selectedBtn = document.querySelector(`[data-question="${index}"].selected`);
+                    
+                    if (!selectedBtn) {
+                        allAnswered = false;
+                        return;
+                    }
+
+                    const selectedOption = parseInt(selectedBtn.dataset.option);
+                    const buttons = document.querySelectorAll(`[data-question="${index}"]`);
+                    
+                    // Disable all buttons
+                    buttons.forEach(btn => btn.style.pointerEvents = 'none');
+                    
+                    // Show correct/incorrect
+                    if (selectedOption === q.correct) {
+                        correctAnswers++;
+                        selectedBtn.classList.add('correct');
+                    } else {
+                        selectedBtn.classList.add('incorrect');
+                        // Highlight correct answer
+                        buttons[q.correct].classList.add('correct');
+                    }
+                });
+
+                if (!allAnswered) {
+                    alert('Please answer all questions first! 📝');
+                    return;
+                }
+
+                // Show results
+                const percentage = Math.round((correctAnswers / story.questions.length) * 100);
+                score.textContent = `${correctAnswers}/${story.questions.length} (${percentage}%)`;
+                
+                if (percentage === 100) {
+                    feedback.textContent = '🌟 Perfect! You are amazing!';
+                    feedback.className = 'text-lg mt-2 text-green-600';
+                } else if (percentage >= 80) {
+                    feedback.textContent = '👏 Great job! You did very well!';
+                    feedback.className = 'text-lg mt-2 text-blue-600';
+                } else if (percentage >= 60) {
+                    feedback.textContent = '👍 Good work! Keep practicing!';
+                    feedback.className = 'text-lg mt-2 text-yellow-600';
+                } else {
+                    feedback.textContent = '💪 Keep trying! Read the story again!';
+                    feedback.className = 'text-lg mt-2 text-orange-600';
+                }
+                
+                results.classList.remove('hidden');
+                results.classList.add('fade-in');
+                submitBtn.disabled = true;
+                submitBtn.textContent = '✅ Answers Checked';
+                
+                // Scroll to results
+                results.scrollIntoView({ behavior: 'smooth' });
+            });
+
+            // Start with home page
+            showHome();
+        });
+    </script>
+</body>
+</html>
