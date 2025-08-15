@@ -25,6 +25,41 @@
             overflow: hidden;
         }
         
+        .grade-card {
+            background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: all 0.4s ease;
+            cursor: pointer;
+            border: 3px solid rgba(255, 255, 255, 0.3);
+        }
+        
+        .grade-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.2);
+        }
+        
+        .grade-1:hover { border-color: rgba(34, 197, 94, 0.5); }
+        .grade-2:hover { border-color: rgba(59, 130, 246, 0.5); }
+        .grade-3:hover { border-color: rgba(245, 158, 11, 0.5); }
+        .grade-4:hover { border-color: rgba(239, 68, 68, 0.5); }
+        
+        .story-card {
+            background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+        }
+        
+        .story-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+        }
+        
         .story-section {
             background: linear-gradient(135deg, #f0f8ff 0%, #e6f3ff 100%);
             border: 3px solid #4facfe;
@@ -42,11 +77,6 @@
             margin: 20px 0;
             transition: all 0.4s ease;
             box-shadow: 0 8px 25px rgba(245, 158, 11, 0.1);
-        }
-        
-        .question-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 35px rgba(245, 158, 11, 0.2);
         }
         
         .option-button {
@@ -110,21 +140,6 @@
             overflow: hidden;
         }
         
-        .big-button::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
-            transition: left 0.5s;
-        }
-        
-        .big-button:hover:not(:disabled)::before {
-            left: 100%;
-        }
-        
         .big-button:hover:not(:disabled) {
             transform: translateY(-5px);
             box-shadow: 0 20px 40px rgba(79, 70, 229, 0.5);
@@ -133,23 +148,6 @@
         .big-button:disabled {
             opacity: 0.7;
             cursor: not-allowed;
-            transform: none;
-        }
-        
-        .story-card {
-            background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
-            border-radius: 20px;
-            overflow: hidden;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-            transition: all 0.4s ease;
-            cursor: pointer;
-            border: 2px solid rgba(255, 255, 255, 0.3);
-        }
-        
-        .story-card:hover {
-            transform: translateY(-10px) scale(1.02);
-            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.2);
-            border-color: rgba(79, 70, 229, 0.3);
         }
         
         .nav-button {
@@ -188,497 +186,1041 @@
             box-shadow: 0 6px 20px rgba(245, 158, 11, 0.1);
         }
         
-        .reading-speed {
-            font-size: 19px;
-            line-height: 1.9;
-            font-weight: 400;
+        .fade-in {
+            animation: fadeIn 0.5s ease-in;
         }
         
-        .simple-text {
-            font-size: 17px;
-            color: #4a5568;
-            font-weight: 400;
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
-
-        /* Animation classes for smooth transitions */
-        .fade-out {
-            opacity: 0;
-            transform: translateY(-10px);
-            transition: all 0.5s ease;
-        }
-
-        .fade-in {
-            opacity: 1;
-            transform: translateY(0);
-            transition: all 0.5s ease;
-        }
-
-        .slide-out-left {
-            transform: translateX(-100%);
-            opacity: 0;
-            transition: all 0.4s ease;
-        }
-
-        .slide-in-right {
-            transform: translateX(0);
-            opacity: 1;
-            transition: all 0.4s ease;
-        }
+        
+        .grade-1-text { font-size: 18px; line-height: 2.0; }
+        .grade-2-text { font-size: 17px; line-height: 1.9; }
+        .grade-3-text { font-size: 16px; line-height: 1.8; }
+        .grade-4-text { font-size: 15px; line-height: 1.7; }
         
         @media (max-width: 768px) {
-            .main-container {
-                margin: 10px;
-                border-radius: 15px;
-            }
-            
-            .reading-speed {
-                font-size: 16px;
-            }
+            .main-container { margin: 10px; border-radius: 15px; }
+            .grade-1-text { font-size: 16px; }
+            .grade-2-text { font-size: 15px; }
+            .grade-3-text { font-size: 14px; }
+            .grade-4-text { font-size: 13px; }
         }
     </style>
 </head>
 <body class="min-h-screen p-4">
 
-    <!-- Header -->
     <div class="text-center mb-8">
         <h1 class="text-5xl md:text-6xl font-bold bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 bg-clip-text text-transparent mb-4">
-            🇴🇲 Oman Stories
+            🇴🇲 Oman Reading Adventures
         </h1>
-        <p class="text-xl text-white font-medium">Read and Learn About Beautiful Oman</p>
+        <p class="text-xl text-white font-medium">Read Amazing Stories About Beautiful Oman</p>
     </div>
 
-    <!-- Navigation (hidden initially) -->
-    <div id="quiz-nav" class="text-center mb-6 hidden">
-        <button id="home-btn" class="nav-button bg-gray-500 text-white hover:bg-gray-600">🏠 Home</button>
-        <button id="nizwa-btn" class="nav-button bg-purple-500 text-white hover:bg-purple-600">🏰 Fort</button>
-        <button id="desert-btn" class="nav-button bg-yellow-500 text-white hover:bg-yellow-600">🏜️ Desert</button>
-        <button id="mosque-btn" class="nav-button bg-blue-500 text-white hover:bg-blue-600">🕌 Mosque</button>
-    </div>
+    <div class="max-w-6xl mx-auto">
 
-    <div class="max-w-4xl mx-auto">
-
-        <!-- Home Page -->
-        <div id="home-page" class="main-container p-10">
+        <div id="grade-page" class="main-container p-10">
             <div class="text-center mb-10">
                 <h2 class="text-4xl font-bold bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent mb-6">
-                    Choose Your Story Adventure!
+                    Choose Your Grade Level
                 </h2>
-                <p class="text-lg text-gray-600 font-medium">Click on a card to begin your journey</p>
+                <p class="text-lg text-gray-600 font-medium">Select the grade that matches your reading level</p>
             </div>
             
-            <div id="story-choices" class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <!-- Nizwa Fort -->
-                <div id="start-nizwa" class="story-card">
-                    <div class="h-48 bg-gradient-to-br from-purple-400 via-purple-500 to-purple-600 flex items-center justify-center relative overflow-hidden">
-                        <div class="absolute inset-0 bg-black opacity-10"></div>
-                        <span class="text-7xl relative z-10">🏰</span>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div id="select-grade-1" class="grade-card grade-1">
+                    <div class="h-32 bg-gradient-to-br from-green-400 to-green-600 flex items-center justify-center">
+                        <span class="text-6xl">🌱</span>
                     </div>
-                    <div class="p-7">
-                        <h3 class="text-2xl font-bold text-purple-700 mb-4">Nizwa Fort</h3>
-                        <p class="simple-text text-gray-600 mb-6 leading-relaxed">Discover the secrets of an ancient fortress that protected Oman for centuries.</p>
-                        <button class="w-full bg-gradient-to-r from-purple-500 to-purple-600 text-white py-3 px-6 rounded-full font-semibold hover:from-purple-600 hover:to-purple-700 transition-all duration-300 transform hover:scale-105 shadow-lg">
-                            ✨ Start Adventure
-                        </button>
+                    <div class="p-6 text-center">
+                        <h3 class="text-2xl font-bold text-green-700 mb-3">Grade 1</h3>
+                        <p class="text-gray-600 mb-4">Simple words and short sentences</p>
+                        <div class="bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm font-medium">
+                            Beginner
+                        </div>
                     </div>
                 </div>
 
-                <!-- Desert -->
-                <div id="start-desert" class="story-card">
-                    <div class="h-48 bg-gradient-to-br from-yellow-400 via-orange-400 to-orange-500 flex items-center justify-center relative overflow-hidden">
-                        <div class="absolute inset-0 bg-black opacity-10"></div>
-                        <span class="text-7xl relative z-10">🏜️</span>
+                <div id="select-grade-2" class="grade-card grade-2">
+                    <div class="h-32 bg-gradient-to-br from-blue-400 to-blue-600 flex items-center justify-center">
+                        <span class="text-6xl">🌿</span>
                     </div>
-                    <div class="p-7">
-                        <h3 class="text-2xl font-bold text-orange-700 mb-4">Wahiba Desert</h3>
-                        <p class="simple-text text-gray-600 mb-6 leading-relaxed">Journey through golden dunes and meet the desert's friendly inhabitants.</p>
-                        <button class="w-full bg-gradient-to-r from-orange-500 to-yellow-500 text-white py-3 px-6 rounded-full font-semibold hover:from-orange-600 hover:to-yellow-600 transition-all duration-300 transform hover:scale-105 shadow-lg">
-                            🌟 Start Adventure
-                        </button>
+                    <div class="p-6 text-center">
+                        <h3 class="text-2xl font-bold text-blue-700 mb-3">Grade 2</h3>
+                        <p class="text-gray-600 mb-4">Easy stories with basic vocabulary</p>
+                        <div class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm font-medium">
+                            Easy
+                        </div>
                     </div>
                 </div>
 
-                <!-- Grand Mosque -->
-                <div id="start-mosque" class="story-card">
-                    <div class="h-48 bg-gradient-to-br from-blue-400 via-blue-500 to-indigo-600 flex items-center justify-center relative overflow-hidden">
-                        <div class="absolute inset-0 bg-black opacity-10"></div>
-                        <span class="text-7xl relative z-10">🕌</span>
+                <div id="select-grade-3" class="grade-card grade-3">
+                    <div class="h-32 bg-gradient-to-br from-yellow-400 to-orange-500 flex items-center justify-center">
+                        <span class="text-6xl">🌳</span>
                     </div>
-                    <div class="p-7">
-                        <h3 class="text-2xl font-bold text-blue-700 mb-4">Grand Mosque</h3>
-                        <p class="simple-text text-gray-600 mb-6 leading-relaxed">Explore the magnificent architecture of Muscat's most beautiful mosque.</p>
-                        <button class="w-full bg-gradient-to-r from-blue-500 to-indigo-600 text-white py-3 px-6 rounded-full font-semibold hover:from-blue-600 hover:to-indigo-700 transition-all duration-300 transform hover:scale-105 shadow-lg">
-                            💫 Start Adventure
-                        </button>
+                    <div class="p-6 text-center">
+                        <h3 class="text-2xl font-bold text-orange-700 mb-3">Grade 3</h3>
+                        <p class="text-gray-600 mb-4">Longer stories with new words</p>
+                        <div class="bg-orange-100 text-orange-800 px-3 py-1 rounded-full text-sm font-medium">
+                            Medium
+                        </div>
+                    </div>
+                </div>
+
+                <div id="select-grade-4" class="grade-card grade-4">
+                    <div class="h-32 bg-gradient-to-br from-red-400 to-red-600 flex items-center justify-center">
+                        <span class="text-6xl">🌲</span>
+                    </div>
+                    <div class="p-6 text-center">
+                        <h3 class="text-2xl font-bold text-red-700 mb-3">Grade 4</h3>
+                        <p class="text-gray-600 mb-4">Complex stories and vocabulary</p>
+                        <div class="bg-red-100 text-red-800 px-3 py-1 rounded-full text-sm font-medium">
+                            Advanced
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- Quiz Container -->
-        <div id="quiz-container" class="main-container p-8 hidden">
-            <h2 id="story-title" class="text-3xl font-bold text-center text-green-600 mb-6"></h2>
+        <div id="stories-page" class="main-container p-10 hidden">
+            <div class="text-center mb-8">
+                <button id="back-to-grades" class="nav-button bg-gray-500 text-white hover:bg-gray-600 mb-4">
+                    ← Back to Grades
+                </button>
+                <h2 id="grade-title" class="text-4xl font-bold mb-6"></h2>
+                <p class="text-lg text-gray-600 font-medium">Choose a story to read</p>
+            </div>
+            
+            <div id="stories-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6">
+                </div>
+        </div>
 
-            <!-- Story Section -->
+        <div id="quiz-container" class="main-container p-8 hidden">
+            <div class="text-center mb-6">
+                <button id="back-to-stories" class="nav-button bg-gray-500 text-white hover:bg-gray-600">
+                    ← Back to Stories
+                </button>
+            </div>
+            
+            <h2 id="story-title" class="text-3xl font-bold text-center text-blue-600 mb-6"></h2>
+
             <div id="story-display" class="story-section">
-                <h3 class="text-2xl font-bold text-green-700 mb-4">📖 Read the Story</h3>
+                <h3 class="text-2xl font-bold text-blue-700 mb-4">📖 Read the Story</h3>
                 <div class="word-help">
-                    <strong>💡 Tip:</strong> Read slowly. If you don't know a word, try to guess from the story!
+                    <strong>💡 Reading Tip:</strong> <span id="reading-tip">Take your time and read carefully!</span>
                 </div>
-                <div id="story-content" class="reading-speed text-gray-700">
-                    <!-- Story content will be added here -->
-                </div>
+                <div id="story-content" class="text-gray-700">
+                    </div>
                 
-                <!-- Continue Button after reading -->
-                <div class="text-center mt-6">
+                <div class="text-center mt-8">
                     <button id="continue-to-quiz" class="big-button">
-                        ✨ Continue to Quiz
+                        ✨ Continue to Questions
                     </button>
                 </div>
             </div>
 
-            <!-- Questions Section (hidden initially) -->
             <div id="questions-section" class="hidden">
-                <!-- Questions will be added here -->
+                <h3 class="text-2xl font-bold text-amber-700 mb-6 text-center">❓ Answer the Questions</h3>
+                <div id="questions-container">
+                    </div>
+                
+                <div class="text-center mt-8">
+                    <button id="submit-btn" class="big-button">
+                        ✅ Submit Answers
+                    </button>
+                </div>
             </div>
 
-            <!-- Submit Button (hidden initially) -->
-            <div id="submit-section" class="text-center mt-8 hidden">
-                <button id="submit-btn" class="big-button">
-                    ✅ Check My Answers
-                </button>
-            </div>
-
-            <!-- Results -->
             <div id="results" class="text-center mt-8 hidden">
                 <div class="floating-score">
-                    <h3 class="text-2xl font-bold">Your Score: <span id="score"></span></h3>
-                    <p id="feedback" class="text-lg mt-2"></p>
+                    <h3 class="text-3xl font-bold">🎉 Your Score</h3>
+                    <div class="text-4xl font-bold mt-3" id="score"></div>
+                    <p id="feedback" class="text-lg mt-3"></p>
                 </div>
-                <button id="try-another" class="nav-button bg-green-500 text-white hover:bg-green-600 mt-4">
-                    🔄 Try Another Story
-                </button>
+                <div class="flex justify-center space-x-4 mt-6">
+                    <button id="try-another-story" class="nav-button bg-blue-500 text-white hover:bg-blue-600">
+                        📚 Try Another Story
+                    </button>
+                    <button id="change-grade" class="nav-button bg-purple-500 text-white hover:bg-purple-600">
+                        🔄 Change Grade
+                    </button>
+                </div>
             </div>
         </div>
 
     </div>
 
     <script>
-        // Quiz data with simpler language for 4th graders
-        const stories = {
-            nizwa: {
-                title: "🏰 The Big Fort in Nizwa",
-                story: `
-                    <p class="mb-4"><strong>Ahmed</strong> went to <strong>Nizwa Fort</strong> with his dad. The fort is very old and very big. It has thick walls to keep people safe long ago.</p>
-                    
-                    <p class="mb-4">They walked up the stairs to the top. From up there, Ahmed could see the whole city! He saw green trees, houses, and the old market called the <strong>souq</strong>.</p>
-                    
-                    <p class="mb-4">At the top, there were big <strong>cannons</strong> - old guns that were used to protect the city. Ahmed's dad told him that people built this fort about 400 years ago to keep their families safe.</p>
-                    
-                    <p>In the souq, they bought dates and a small <strong>khanjar</strong> (a special curved knife) to remember their visit. Ahmed learned that Nizwa was once the capital city of Oman!</p>
-                `,
-                questions: [
-                    {
-                        text: "Who did Ahmed visit the fort with?",
-                        options: ["His dad", "His mom", "His friend", "His teacher"],
-                        correct: 0
+        // Comprehensive story data for all grades
+        const allStories = {
+            grade1: {
+                title: "🌱 Grade 1 Stories",
+                readingTip: "Sound out new words slowly. It's okay to read more than once!",
+                textClass: "grade-1-text",
+                stories: {
+                    camel: {
+                        title: "🐪 My Pet Camel",
+                        content: `
+                            <p class="mb-4">Ali has a pet camel. The camel is big and brown. His name is Jamal.</p>
+                            <p class="mb-4">Jamal eats grass and dates. He drinks lots of water. Ali gives him food every day.</p>
+                            <p class="mb-4">The camel can walk in the sand. He does not get hot. Ali rides on Jamal.</p>
+                            <p>Ali loves his camel. Jamal is a good friend. They play in the desert together.</p>
+                        `,
+                        questions: [
+                            {
+                                text: "What is the camel's name?",
+                                options: ["Ali", "Jamal", "Ahmed", "Omar"],
+                                correct: 1
+                            },
+                            {
+                                text: "What color is the camel?",
+                                options: ["Black", "White", "Brown", "Gray"],
+                                correct: 2
+                            },
+                            {
+                                text: "What does the camel eat?",
+                                options: ["Grass and dates", "Fish", "Bread", "Rice"],
+                                correct: 0
+                            },
+                            {
+                                text: "Where do Ali and Jamal play?",
+                                options: ["At home", "In the park", "In the desert", "At school"],
+                                correct: 2
+                            },
+                            {
+                                text: "Who gives the camel food?",
+                                options: ["Ali", "Mom", "Dad", "Teacher"],
+                                correct: 0
+                            }
+                        ]
                     },
-                    {
-                        text: "What could Ahmed see from the top of the fort?",
-                        options: ["Only the desert", "The whole city", "Just the parking lot", "The sea"],
-                        correct: 1
+                    fort: {
+                        title: "🏰 The Big Fort",
+                        content: `
+                            <p class="mb-4">Sara went to see a big fort. The fort is old and tall. It is made of mud and stone.</p>
+                            <p class="mb-4">Sara walked up the stairs. She saw the city from the top. It was very pretty.</p>
+                            <p class="mb-4">There were old guns on the fort. People used them long ago. They kept bad people away.</p>
+                            <p>Sara took a picture. She was happy to see the old fort. It was a fun day.</p>
+                        `,
+                        questions: [
+                            {
+                                text: "What is the fort made of?",
+                                options: ["Wood", "Mud and stone", "Glass", "Metal"],
+                                correct: 1
+                            },
+                            {
+                                text: "What did Sara do at the top?",
+                                options: ["Ate food", "Saw the city", "Played games", "Slept"],
+                                correct: 1
+                            },
+                            {
+                                text: "What were on the fort?",
+                                options: ["Cars", "Old guns", "Books", "Toys"],
+                                correct: 1
+                            },
+                            {
+                                text: "How did Sara feel?",
+                                options: ["Sad", "Angry", "Happy", "Scared"],
+                                correct: 2
+                            },
+                            {
+                                text: "What did Sara do at the fort?",
+                                options: ["Took a picture", "Bought food", "Read a book", "Drew a picture"],
+                                correct: 0
+                            }
+                        ]
                     },
-                    {
-                        text: "What are cannons?",
-                        options: ["New cars", "Old guns", "Big books", "Small toys"],
-                        correct: 1
+                    beach: {
+                        title: "🏖️ Fun at the Beach",
+                        content: `
+                            <p class="mb-4">Omar went to the beach. The water was blue and clean. The sand was white and soft.</p>
+                            <p class="mb-4">Omar built a sand castle. He used a bucket and a small shovel. The castle was big.</p>
+                            <p class="mb-4">He found pretty shells on the beach. Some were pink. Some were white.</p>
+                            <p>Omar had fun at the beach. He wants to go back tomorrow. The beach is his favorite place.</p>
+                        `,
+                        questions: [
+                            {
+                                text: "What color was the water?",
+                                options: ["Green", "Blue", "Red", "Yellow"],
+                                correct: 1
+                            },
+                            {
+                                text: "What did Omar build?",
+                                options: ["A house", "A car", "A sand castle", "A boat"],
+                                correct: 2
+                            },
+                            {
+                                text: "What did he use to build?",
+                                options: ["His hands only", "A bucket and shovel", "Sticks", "Rocks"],
+                                correct: 1
+                            },
+                            {
+                                text: "What did he find on the beach?",
+                                options: ["Toys", "Pretty shells", "Books", "Food"],
+                                correct: 1
+                            },
+                            {
+                                text: "When does Omar want to go back?",
+                                options: ["Next week", "Tomorrow", "Next month", "Never"],
+                                correct: 1
+                            }
+                        ]
                     },
-                    {
-                        text: "How old is the fort?",
-                        options: ["50 years old", "100 years old", "About 400 years old", "10 years old"],
-                        correct: 2
+                    market: {
+                        title: "🛒 At the Market",
+                        content: `
+                            <p class="mb-4">Fatima went to the market with her mom. The market was big and busy. Many people were there.</p>
+                            <p class="mb-4">They bought red apples and yellow bananas. The fruits were fresh and sweet.</p>
+                            <p class="mb-4">Fatima saw colorful scarves and pretty jewelry. Everything looked nice.</p>
+                            <p>They bought dates for dad. Fatima likes going to the market. It is fun to see new things.</p>
+                        `,
+                        questions: [
+                            {
+                                text: "Who did Fatima go with?",
+                                options: ["Her dad", "Her mom", "Her friend", "Alone"],
+                                correct: 1
+                            },
+                            {
+                                text: "What fruits did they buy?",
+                                options: ["Apples and bananas", "Oranges", "Grapes", "Mangoes"],
+                                correct: 0
+                            },
+                            {
+                                text: "What were the fruits like?",
+                                options: ["Old and bad", "Fresh and sweet", "Expensive", "Small"],
+                                correct: 1
+                            },
+                            {
+                                text: "What did they buy for dad?",
+                                options: ["Apples", "Bananas", "Dates", "Bread"],
+                                correct: 2
+                            },
+                            {
+                                text: "How does Fatima feel about the market?",
+                                options: ["She doesn't like it", "It's boring", "It's fun", "It's scary"],
+                                correct: 2
+                            }
+                        ]
                     },
-                    {
-                        text: "What is a khanjar?",
-                        options: ["A type of food", "A special curved knife", "A big cannon", "A prayer book"],
-                        correct: 1
+                    school: {
+                        title: "🏫 My School Day",
+                        content: `
+                            <p class="mb-4">Ahmed goes to school every day. His school is big and clean. It has many rooms.</p>
+                            <p class="mb-4">He learns to read and write. His teacher is very nice. She helps all the children.</p>
+                            <p class="mb-4">At lunch, Ahmed eats with his friends. They talk and laugh together.</p>
+                            <p>After school, Ahmed plays in the yard. He likes school very much. Learning is fun!</p>
+                        `,
+                        questions: [
+                            {
+                                text: "How often does Ahmed go to school?",
+                                options: ["Sometimes", "Every day", "Once a week", "Never"],
+                                correct: 1
+                            },
+                            {
+                                text: "What is his teacher like?",
+                                options: ["Mean", "Very nice", "Angry", "Sad"],
+                                correct: 1
+                            },
+                            {
+                                text: "What does Ahmed do at lunch?",
+                                options: ["Sleep", "Study", "Eat with friends", "Go home"],
+                                correct: 2
+                            },
+                            {
+                                text: "Where does he play after school?",
+                                options: ["At home", "In the yard", "At the beach", "In the market"],
+                                correct: 1
+                            },
+                            {
+                                text: "How does Ahmed feel about school?",
+                                options: ["He hates it", "He likes it very much", "He's scared", "He's bored"],
+                                correct: 1
+                            }
+                        ]
                     }
-                ]
+                }
             },
-            desert: {
-                title: "🏜️ Fun in the Desert",
-                story: `
-                    <p class="mb-4"><strong>Sara</strong> and her family went to the <strong>Wahiba Desert</strong>. The desert has big hills made of golden sand called <strong>dunes</strong>.</p>
-                    
-                    <p class="mb-4">They rode in a big car that could drive on sand. The car went up and down the sand hills like a fun ride! Sara laughed as they bounced around.</p>
-                    
-                    <p class="mb-4">When the sun went down, the sky turned beautiful colors - orange, pink, and purple. They met a <strong>Bedouin family</strong> who live in the desert. They shared tea and told stories.</p>
-                    
-                    <p>At night, Sara looked up at the stars. In the desert, you can see so many stars! The Bedouin family showed them their <strong>camels</strong> and gave them fresh bread and sweet dates to eat.</p>
-                `,
-                questions: [
-                    {
-                        text: "What are dunes made of?",
-                        options: ["Rocks", "Golden sand", "Water", "Grass"],
-                        correct: 1
+            grade2: {
+                title: "🌿 Grade 2 Stories",
+                readingTip: "Read each sentence carefully. Think about what happens next!",
+                textClass: "grade-2-text",
+                stories: {
+                    nizwa: {
+                        title: "🏰 Adventure at Nizwa Fort",
+                        content: `
+                            <p class="mb-4">Layla and her family visited the famous Nizwa Fort during the weekend. The ancient fort stood tall with its thick stone walls that were built many years ago to protect the people of Oman.</p>
+                            <p class="mb-4">As they climbed the winding stairs inside the round tower, Layla counted each step. There were so many! When they reached the top, she could see the entire city of Nizwa spread out below like a colorful carpet.</p>
+                            <p class="mb-4">Her father explained that long ago, soldiers would stand guard here, watching for enemies approaching the city. They had cannons to defend their homes and families.</p>
+                            <p>Before leaving, they visited the traditional market nearby where Layla bought a small silver bracelet as a memory of her wonderful day exploring Omani history.</p>
+                        `,
+                        questions: [
+                            {
+                                text: "What was the fort's walls made of?",
+                                options: ["Wood", "Stone", "Metal", "Mud"],
+                                correct: 1
+                            },
+                            {
+                                text: "What shape was the tower they climbed?",
+                                options: ["Square", "Triangle", "Round", "Rectangle"],
+                                correct: 2
+                            },
+                            {
+                                text: "What could Layla see from the top?",
+                                options: ["The ocean", "The entire city", "Mountains only", "Other forts"],
+                                correct: 1
+                            },
+                            {
+                                text: "What did soldiers use cannons for?",
+                                options: ["To make noise", "To defend their homes", "To celebrate", "To hunt animals"],
+                                correct: 1
+                            },
+                            {
+                                text: "What did Layla buy as a memory?",
+                                options: ["A book", "A silver bracelet", "A toy cannon", "A postcard"],
+                                correct: 1
+                            }
+                        ]
                     },
-                    {
-                        text: "How did Sara feel riding in the car?",
-                        options: ["Scared", "Bored", "Happy and laughing", "Sleepy"],
-                        correct: 2
+                    wadi: {
+                        title: "🏞️ The Beautiful Wadi",
+                        content: `
+                            <p class="mb-4">Khalid's class went on a school trip to Wadi Shab, one of Oman's most beautiful natural places. A wadi is a valley with fresh water that flows between tall rocky mountains.</p>
+                            <p class="mb-4">The children had to walk carefully on the rocky path for about twenty minutes. Along the way, they saw date palm trees providing shade and small pools of crystal-clear water.</p>
+                            <p class="mb-4">At the end of their hike, they discovered a hidden cave behind a waterfall! The water was cool and refreshing. Some brave students even swam in the natural swimming pools.</p>
+                            <p>Khalid learned that wadis are very important in Oman because they provide fresh water for people, animals, and plants in the desert climate. He felt proud of his country's natural beauty.</p>
+                        `,
+                        questions: [
+                            {
+                                text: "What is a wadi?",
+                                options: ["A desert", "A mountain", "A valley with water", "A building"],
+                                correct: 2
+                            },
+                            {
+                                text: "How long did they walk?",
+                                options: ["Ten minutes", "About twenty minutes", "One hour", "All day"],
+                                correct: 1
+                            },
+                            {
+                                text: "What did they find behind the waterfall?",
+                                options: ["A treasure", "A hidden cave", "More trees", "Wild animals"],
+                                correct: 1
+                            },
+                            {
+                                text: "Why are wadis important in Oman?",
+                                options: ["They're pretty", "They provide fresh water", "They're fun to visit", "They have gold"],
+                                correct: 1
+                            },
+                            {
+                                text: "What trees provided shade?",
+                                options: ["Oak trees", "Pine trees", "Date palm trees", "Apple trees"],
+                                correct: 2
+                            }
+                        ]
                     },
-                    {
-                        text: "What colors did the sky turn at sunset?",
-                        options: ["Green and blue", "Black and white", "Orange, pink, and purple", "Yellow and red"],
-                        correct: 2
+                    grandmosque: {
+                        title: "🕌 The Sultan Qaboos Grand Mosque",
+                        content: `
+                            <p class="mb-4">Ahmed and his father visited the magnificent Sultan Qaboos Grand Mosque in Muscat. It is one of the most beautiful mosques in the world, built by the late Sultan Qaboos bin Said.</p>
+                            <p class="mb-4">Inside the main prayer hall, Ahmed was amazed by the giant carpet that covered the floor. His father told him it was the second-largest hand-woven carpet in the world! It took hundreds of weavers many years to make.</p>
+                            <p class="mb-4">Above them hung a huge chandelier, sparkling with millions of crystals. It was a gift from a special country. The beautiful designs on the walls and ceilings were like a big piece of art.</p>
+                            <p>Ahmed learned that the mosque is a place of peace, prayer, and learning. It shows how Oman values both its beautiful traditions and its modern future. He felt proud to see such a wonderful place in his country.</p>
+                        `,
+                        questions: [
+                            {
+                                text: "Who built the Sultan Qaboos Grand Mosque?",
+                                options: ["Ahmed", "His father", "Sultan Qaboos bin Said", "An artist"],
+                                correct: 2
+                            },
+                            {
+                                text: "What was special about the carpet?",
+                                options: ["It was small", "It was painted", "It was the second-largest hand-woven carpet", "It was old"],
+                                correct: 2
+                            },
+                            {
+                                text: "What hung from the ceiling?",
+                                options: ["A lamp", "A giant chandelier", "A crystal ball", "A painting"],
+                                correct: 1
+                            },
+                            {
+                                text: "What does the mosque show about Oman?",
+                                options: ["It's an old country", "It values traditions and modern future", "It only likes old things", "It's just for tourists"],
+                                correct: 1
+                            },
+                            {
+                                text: "What is the mosque a place of?",
+                                options: ["Playing", "Shopping and eating", "Peace, prayer, and learning", "Singing"],
+                                correct: 2
+                            }
+                        ]
                     },
-                    {
-                        text: "Who are Bedouins?",
-                        options: ["People who live in cities", "People who live in the desert", "People who work in schools", "People who drive cars"],
-                        correct: 1
-                    },
-                    {
-                        text: "What animals did the Bedouin family have?",
-                        options: ["Horses", "Cows", "Camels", "Dogs"],
-                        correct: 2
+                    turtles: {
+                        title: "🐢 The Turtle Sanctuary",
+                        content: `
+                            <p class="mb-4">Mariam went with her family to Ras Al Jinz, a special beach in Oman. It is a sanctuary where green turtles come from far away to lay their eggs. It is protected to keep the turtles safe.</p>
+                            <p class="mb-4">At night, Mariam quietly walked on the beach with a guide. They saw a mother turtle slowly digging a nest in the sand with her flippers. She was very big and strong!</p>
+                            <p class="mb-4">After laying her eggs, the turtle covered them with sand and slowly went back to the sea. The guide explained that the baby turtles will hatch after about two months and crawl to the ocean all by themselves.</p>
+                            <p>Mariam learned how important it is to protect these amazing animals. The sanctuary helps make sure the turtles have a safe place to come back to for many years to come.</p>
+                        `,
+                        questions: [
+                            {
+                                text: "What kind of turtles come to Ras Al Jinz?",
+                                options: ["Sea turtles", "Green turtles", "Land turtles", "River turtles"],
+                                correct: 1
+                            },
+                            {
+                                text: "What did the mother turtle do with her flippers?",
+                                options: ["Swam fast", "Dug a nest", "Ate food", "Played"],
+                                correct: 1
+                            },
+                            {
+                                text: "What did Mariam see the mother turtle do after laying eggs?",
+                                options: ["Go back to the sea", "Fly away", "Stay on the beach", "Eat food"],
+                                correct: 0
+                            },
+                            {
+                                text: "How long does it take for the baby turtles to hatch?",
+                                options: ["One week", "One month", "About two months", "One year"],
+                                correct: 2
+                            },
+                            {
+                                text: "Why is the sanctuary important?",
+                                options: ["It is a fun place", "It helps keep the turtles safe", "It is for tourists only", "It has nice sand"],
+                                correct: 1
+                            }
+                        ]
                     }
-                ]
+                }
             },
-            mosque: {
-                title: "🕌 The Beautiful Big Mosque",
-                story: `
-                    <p class="mb-4"><strong>Layla's</strong> class visited the <strong>Sultan Qaboos Grand Mosque</strong> in Muscat. It is a very big and beautiful building with <strong>five tall towers</strong>.</p>
-                    
-                    <p class="mb-4">Inside, there was a huge <strong>carpet</strong> on the floor. The carpet was so big that it took many women almost four years to make it! Above their heads was a giant <strong>chandelier</strong> with hundreds of bright lights.</p>
-                    
-                    <p class="mb-4">Outside the mosque, there was a pretty garden with colorful flowers. Everything was very quiet and peaceful. People come here to pray and think about God.</p>
-                    
-                    <p>Layla learned that the heavy chandelier was made in Germany and brought to Oman. She was amazed by how beautiful and clean everything was in this special place.</p>
-                `,
-                questions: [
-                    {
-                        text: "How many tall towers does the mosque have?",
-                        options: ["Three", "Five", "Seven", "Ten"],
-                        correct: 1
+            grade3: {
+                title: "🌳 Grade 3 Stories",
+                readingTip: "Look for the main idea in each paragraph. Connect the events in your mind!",
+                textClass: "grade-3-text",
+                stories: {
+                    frankincense: {
+                        title: "🌿 The Frankincense Trail",
+                        content: `
+                            <p class="mb-4">Long before modern transportation existed, merchants from ancient Oman traveled dangerous routes across deserts and mountains, carrying precious frankincense to distant lands. This aromatic resin, extracted from special trees that grew only in southern Arabia, was worth more than gold in ancient times.</p>
+                            <p class="mb-4">Young Saeed accompanied his grandfather, an experienced frankincense trader, on one of these historic journeys. They joined a caravan of fifty camels, each loaded with bags of the precious resin that would be sold in Egypt, Rome, and India.</p>
+                            <p class="mb-4">The journey was challenging and took many months. They crossed scorching deserts during the day and slept under star-filled skies at night. Along the way, they stopped at ancient trading posts where they exchanged stories with merchants from different cultures and learned about distant kingdoms.</p>
+                            <p class="mb-4">When they finally reached the busy port cities, Saeed witnessed something remarkable. Kings and emperors eagerly purchased their frankincense for religious ceremonies, medicine, and perfumes. The sweet-smelling resin was burned in temples and palaces across the ancient world.</p>
+                            <p>Through this adventure, Saeed understood that his homeland, Oman, was connected to the entire world through trade, making it one of the most important places in ancient history.</p>
+                        `,
+                        questions: [
+                            {
+                                text: "What made frankincense so valuable in ancient times?",
+                                options: ["It was rare and aromatic", "It was easy to find", "It was heavy", "It was colorful"],
+                                correct: 0
+                            },
+                            {
+                                text: "How many camels were in the caravan?",
+                                options: ["Twenty", "Thirty", "Fifty", "One hundred"],
+                                correct: 2
+                            },
+                            {
+                                text: "What did merchants do at trading posts?",
+                                options: ["Only bought food", "Exchanged stories and learned about kingdoms", "Slept all day", "Sold their camels"],
+                                correct: 1
+                            },
+                            {
+                                text: "What was frankincense used for by kings and emperors?",
+                                options: ["Building houses", "Religious ceremonies, medicine, and perfumes", "Making clothes", "Cooking food"],
+                                correct: 1
+                            },
+                            {
+                                text: "What did Saeed learn about Oman from this journey?",
+                                options: ["It was isolated from the world", "It was connected to the world through trade", "It was a poor country", "It had no valuable resources"],
+                                correct: 1
+                            }
+                        ]
                     },
-                    {
-                        text: "How long did it take to make the big carpet?",
-                        options: ["One year", "Two years", "Almost four years", "Six months"],
-                        correct: 2
+                    sinbad: {
+                        title: "⛵ The Story of Sinbad the Sailor",
+                        content: `
+                            <p class="mb-4">Sinbad the Sailor is a legendary hero from Oman whose stories have been told for hundreds of years. He was a brave sailor from the city of Sohar who loved to travel the seas and trade goods with people in far-off lands.</p>
+                            <p class="mb-4">On his seven famous voyages, Sinbad faced many dangers. He was shipwrecked on a desert island and found a giant bird called a Roc, whose egg was as big as a house. He also met strange monsters, battled giant sea serpents, and discovered magical places full of treasure.</p>
+                            <p class="mb-4">Sinbad’s adventures were not just about danger; they were also about smart thinking. He used his cleverness to escape from difficult situations and his knowledge of the stars and sea to find his way home to Oman. Every time he returned, he was a little bit wiser and had a new, amazing tale to tell.</p>
+                            <p>The stories of Sinbad remind Omanis of their deep history with the sea and their long tradition of exploration and trade. He is a symbol of courage, resilience, and the spirit of adventure that is so important to the Omani people.</p>
+                        `,
+                        questions: [
+                            {
+                                text: "Where was Sinbad the Sailor from?",
+                                options: ["Egypt", "India", "Sohar, Oman", "China"],
+                                correct: 2
+                            },
+                            {
+                                text: "How many famous voyages did he have?",
+                                options: ["One", "Three", "Five", "Seven"],
+                                correct: 3
+                            },
+                            {
+                                text: "What giant bird did he find?",
+                                options: ["An eagle", "A phoenix", "A Roc", "A parrot"],
+                                correct: 2
+                            },
+                            {
+                                text: "How did Sinbad escape from dangers?",
+                                options: ["With magic", "By fighting", "By his cleverness and knowledge of the sea", "By asking for help"],
+                                correct: 2
+                            },
+                            {
+                                text: "What does Sinbad symbolize for Omanis?",
+                                options: ["Riches and power", "A famous movie", "A love for food", "Courage, resilience, and the spirit of adventure"],
+                                correct: 3
+                            }
+                        ]
                     },
-                    {
-                        text: "What is a chandelier?",
-                        options: ["A big carpet", "A tall tower", "A bright light with crystals", "A type of flower"],
-                        correct: 2
-                    },
-                    {
-                        text: "Where was the chandelier made?",
-                        options: ["Oman", "Germany", "India", "America"],
-                        correct: 1
-                    },
-                    {
-                        text: "What do people do at the mosque?",
-                        options: ["Play games", "Buy food", "Pray and think about God", "Watch movies"],
-                        correct: 2
+                    falaj: {
+                        title: "💧 Falaj Al Khatmeen: The Water of Life",
+                        content: `
+                            <p class="mb-4">In the heart of Oman, people have used a clever system called a falaj for thousands of years. A falaj is an ancient channel that carries fresh water from underground sources or mountain springs to villages and farms. The Falaj Al Khatmeen in Nizwa is one of the most famous examples and a UNESCO World Heritage site.</p>
+                            <p class="mb-4">Building a falaj was a difficult and careful job. Workers dug long tunnels underground and built canals above the ground, sometimes for many kilometers. They had to make sure the water flowed at just the right speed, using the natural slope of the land.</p>
+                            <p class="mb-4">The water from the falaj was shared fairly among all the villagers. It was used to drink, to water crops like dates and limes, and for washing. A special person, called a 'qayeed', was in charge of making sure everyone got their turn to use the water, according to ancient rules.</p>
+                            <p>The falaj system shows how the Omani people have always respected nature and worked together as a community. It is a symbol of cooperation and wisdom, proving that ancient solutions can still provide for modern needs, even in a dry land.</p>
+                        `,
+                        questions: [
+                            {
+                                text: "What is a falaj?",
+                                options: ["A type of building", "A long bridge", "A channel for carrying fresh water", "A mountain"],
+                                correct: 2
+                            },
+                            {
+                                text: "How did workers make the water flow?",
+                                options: ["With a pump", "Using a natural slope of the land", "By carrying it in buckets", "With a machine"],
+                                correct: 1
+                            },
+                            {
+                                text: "What was a 'qayeed'?",
+                                options: ["A builder", "A farmer", "A person in charge of sharing the water", "A king"],
+                                correct: 2
+                            },
+                            {
+                                text: "What crops did the falaj water?",
+                                options: ["Rice and wheat", "Dates and limes", "Apples and oranges", "Corn and potatoes"],
+                                correct: 1
+                            },
+                            {
+                                text: "What does the falaj system symbolize?",
+                                options: ["Hard work and money", "Modern technology", "Cooperation and wisdom", "Only old history"],
+                                correct: 2
+                            }
+                        ]
                     }
-                ]
+                }
+            },
+            grade4: {
+                title: "🌲 Grade 4 Stories",
+                readingTip: "Analyze the characters' motivations and the story's deeper meanings as you read!",
+                textClass: "grade-4-text",
+                stories: {
+                    innovation: {
+                        title: "🔬 The Young Inventor",
+                        content: `
+                            <p class="mb-4">Sixteen-year-old Hassan had always been fascinated by the intersection of traditional wisdom and modern technology. Growing up in a family of engineers and craftsmen, he developed an innovative solution to address one of Oman's most pressing environmental challenges: water scarcity in remote desert communities.</p>
+                            <p class="mb-4">His invention combined principles from ancient falaj irrigation systems with contemporary solar technology and advanced materials science. The device could extract moisture from desert air using solar-powered condensation, providing clean drinking water for small communities without access to traditional water sources.</p>
+                            <p class="mb-4">Hassan's inspiration came from observing how traditional Omani builders had designed windcatchers and courtyard systems that naturally cooled buildings and conserved water. By studying these time-tested techniques and applying modern scientific understanding of thermodynamics and materials engineering, he created a prototype that was both efficient and culturally appropriate.</p>
+                            <p class="mb-4">The project attracted attention from international science competitions, environmental organizations, and technology companies. However, Hassan remained focused on ensuring his invention would benefit rural Omani communities, particularly Bedouin families who maintained traditional lifestyles while adapting to contemporary challenges.</p>
+                            <p class="mb-4">Working with mentors from Sultan Qaboos University and international partners, Hassan refined his design through multiple iterations, incorporating feedback from potential users and addressing practical implementation challenges. His approach emphasized sustainability, local manufacturing capabilities, and community ownership of the technology.</p>
+                            <p>As Hassan prepared to present his invention at a global youth innovation summit, he reflected on how his work embodied Oman's philosophy of respecting tradition while embracing beneficial change. His success demonstrated that young people could contribute meaningfully to solving complex problems by bridging ancient wisdom and modern innovation.</p>
+                        `,
+                        questions: [
+                            {
+                                text: "What did Hassan's invention combine?",
+                                options: ["Only modern technology", "Ancient falaj systems with solar technology", "Just traditional methods", "Only foreign techniques"],
+                                correct: 1
+                            },
+                            {
+                                text: "What inspired Hassan's design?",
+                                options: ["Foreign inventions", "Traditional Omani windcatchers and courtyard systems", "Modern factories", "Space technology"],
+                                correct: 1
+                            },
+                            {
+                                text: "Who did Hassan want his invention to benefit primarily?",
+                                options: ["International companies", "Urban communities", "Rural Omani communities, particularly Bedouins", "Only scientists"],
+                                correct: 2
+                            },
+                            {
+                                text: "What philosophy did Hassan's work embody?",
+                                options: ["Rejecting all traditions", "Respecting tradition while embracing beneficial change", "Only using modern methods", "Avoiding innovation"],
+                                correct: 1
+                            }
+                        ]
+                    },
+                    leadership: {
+                        title: "👑 The Young Leader's Vision",
+                        content: `
+                            <p class="mb-4">Eighteen-year-old Fatima had been selected to represent Oman at the International Youth Leadership Summit, where young people from around the world would propose solutions to global challenges. Her project focused on creating sustainable economic opportunities for rural communities while preserving cultural heritage and environmental resources.</p>
+                            <p class="mb-4">Drawing from her extensive research and community interviews, Fatima proposed establishing a network of cultural heritage centers throughout Oman's rural areas. These centers would serve multiple purposes: preserving traditional crafts and knowledge, providing education and training opportunities, generating sustainable income through cultural tourism, and strengthening community bonds.</p>
+                            <p class="mb-4">Her vision incorporated cutting-edge digital technology to document and share traditional knowledge globally while creating local economic benefits. Master craftsmen would teach traditional skills like silversmithing, weaving, and pottery to younger generations, while also reaching international audiences through virtual workshops and online marketplaces.</p>
+                            <p class="mb-4">Fatima's proposal emphasized the importance of community ownership and decision-making in development projects. Rather than imposing external solutions, she advocated for approaches that emerged from local needs, values, and aspirations, ensuring that progress strengthened rather than undermined cultural identity and social cohesion.</p>
+                            <p class="mb-4">The international audience was impressed by her sophisticated understanding of sustainable development principles and her ability to articulate how traditional wisdom could inform contemporary solutions to complex global problems. Her presentation demonstrated remarkable maturity and cultural insight.</p>
+                            <p class="mb-4">During the summit's collaborative sessions, Fatima worked with peers from different continents to identify common challenges and shared solutions. She discovered that many rural communities worldwide faced similar pressures from globalization, urbanization, and economic change, making her Omani experience relevant to global discussions.</p>
+                            <p>When Fatima returned to Oman, she carried with her not only international recognition but also a deeper appreciation for her country's unique contributions to human civilization and a strengthened commitment to serving as a bridge between local traditions and global opportunities.</p>
+                        `,
+                        questions: [
+                            {
+                                text: "What was the main focus of Fatima's project?",
+                                options: ["Building factories", "Creating sustainable economic opportunities while preserving heritage", "Promoting only tourism", "Developing technology"],
+                                correct: 1
+                            },
+                            {
+                                text: "What multiple purposes would the heritage centers serve?",
+                                options: ["Only tourism", "Preserving crafts, education, income generation, and community bonding", "Just entertainment", "Only preserving artifacts"],
+                                correct: 1
+                            },
+                            {
+                                text: "How did Fatima plan to use digital technology?",
+                                options: ["To replace traditional methods", "To document and share knowledge globally while creating local benefits", "Only for entertainment", "To eliminate traditional crafts"],
+                                correct: 1
+                            },
+                            {
+                                text: "What did Fatima emphasize about development projects?",
+                                options: ["They should be imposed from outside", "Community ownership and decision-making", "Only experts should decide", "Traditional methods should be ignored"],
+                                correct: 1
+                            },
+                            {
+                                text: "What did Fatima discover about rural communities worldwide?",
+                                options: ["They had no common challenges", "They faced similar pressures from globalization and change", "They were all very different", "They didn't need help"],
+                                correct: 1
+                            }
+                        ]
+                    },
+                    sultanqaboos: {
+                        title: "👑 The Vision of Sultan Qaboos",
+                        content: `
+                            <p class="mb-4">Sultan Qaboos bin Said Al Said, who ruled Oman for nearly five decades, is revered as the father of modern Oman. He took power in 1970 when the country was still developing and had a powerful vision to transform it into a modern, prosperous nation while preserving its rich history and culture.</p>
+                            <p class="mb-4">His vision, known as the "Omani Renaissance," was not just about building roads and schools. It was a holistic approach that focused on three main pillars: economic development, social progress, and political stability. Sultan Qaboos believed that a nation's strength lay in its educated and healthy citizens, and he invested heavily in education, healthcare, and infrastructure across the country.</p>
+                            <p class="mb-4">Unlike many leaders, he was known for his personal connection with the people. Every year, he would travel to different regions of Oman for his "royal tours," where he met with citizens, listened to their concerns, and saw their progress firsthand. This direct communication built a strong bond of trust and unity between the ruler and his people.</p>
+                            <p class="mb-4">Sultan Qaboos also played a crucial role on the international stage, promoting peace and dialogue. He believed in a policy of neutrality and peaceful coexistence, positioning Oman as a trusted mediator in regional conflicts. His leadership made Oman a beacon of stability in a sometimes turbulent region.</p>
+                            <p>His legacy is visible everywhere in Oman today, from the stunning Grand Mosque to the world-class university and hospitals. He taught Omanis that true progress is not just about wealth, but about wisdom, unity, and a deep respect for both tradition and modernity.</p>
+                        `,
+                        questions: [
+                            {
+                                text: "What is Sultan Qaboos revered as?",
+                                options: ["The first king", "The father of modern Oman", "A rich merchant", "A soldier"],
+                                correct: 1
+                            },
+                            {
+                                text: "What was his vision for the country called?",
+                                options: ["The Great Change", "The Golden Age", "The Omani Renaissance", "The Modern Era"],
+                                correct: 2
+                            },
+                            {
+                                text: "What did his 'royal tours' help him do?",
+                                options: ["Go on vacation", "Meet with his people and listen to their concerns", "Only visit rich people", "Build forts"],
+                                correct: 1
+                            },
+                            {
+                                text: "What did Sultan Qaboos promote on the international stage?",
+                                options: ["War and conflict", "A policy of neutrality and peaceful coexistence", "Global trade only", "Competition with other countries"],
+                                correct: 1
+                            },
+                            {
+                                text: "What did he believe was the true meaning of progress?",
+                                options: ["Only economic growth", "Only building cities", "Wealth, wisdom, unity, and respect for tradition and modernity", "Being the most powerful country"],
+                                correct: 2
+                            }
+                        ]
+                    },
+                    albuayan: {
+                        title: "🏨 The Al-Bustan Palace: A Modern Oasis",
+                        content: `
+                            <p class="mb-4">The Al-Bustan Palace Hotel, located on the shores of the Gulf of Oman, is more than just a luxurious hotel. It stands as a symbol of Omani architecture and hospitality, blending traditional design with modern engineering. When it was built in the 1980s, it was a marvel of its time, designed to host international summits and royal guests.</p>
+                            <p class="mb-4">Upon entering, visitors are greeted by a breathtaking 38-meter-high atrium, crowned with a magnificent crystal chandelier. The interior design pays homage to traditional Omani aesthetics, featuring hand-carved wooden panels, intricate geometric patterns, and vibrant mosaics that tell stories of the nation's rich heritage.</p>
+                            <p class="mb-4">The hotel's design incorporates elements that protect against the sun while allowing natural light to enter, a clever technique seen in traditional Omani buildings. It is surrounded by lush gardens, date palm trees, and a man-made lagoon, creating a serene and cool atmosphere that contrasts with the surrounding dry landscape. It truly feels like an oasis.</p>
+                            <p class="mb-4">Over the years, the Al-Bustan Palace has hosted heads of state, world leaders, and celebrities, showcasing Oman's ability to combine tradition with luxury on a global scale. It represents the country's welcoming nature and its commitment to excellence.</p>
+                            <p>For many Omanis, the hotel is a point of national pride. It reminds them that their country, while deeply rooted in history, has the vision and ambition to build a modern and beautiful future.</p>
+                        `,
+                        questions: [
+                            {
+                                text: "Where is the Al-Bustan Palace Hotel located?",
+                                options: ["In the desert", "On a mountain top", "On the shores of the Gulf of Oman", "In a village"],
+                                correct: 2
+                            },
+                            {
+                                text: "What is special about the hotel's atrium?",
+                                options: ["It is small", "It has a giant chandelier", "It is dark", "It is for playing"],
+                                correct: 1
+                            },
+                            {
+                                text: "What do the mosaics in the hotel tell stories of?",
+                                options: ["Foreign lands", "Ancient wars", "The nation's rich heritage", "Famous people"],
+                                correct: 2
+                            },
+                            {
+                                text: "How does the hotel's design protect against the sun?",
+                                options: ["By using air conditioning only", "With clever elements that allow natural light but protect from the sun", "By having no windows", "By using special glass"],
+                                correct: 1
+                            },
+                            {
+                                text: "What does the Al-Bustan Palace Hotel symbolize?",
+                                options: ["Only luxury", "Omani architecture, hospitality, and national pride", "A place for rich people only", "A new building in Oman"],
+                                correct: 1
+                            }
+                        ]
+                    }
+                }
             }
         };
 
-        // JavaScript functionality
-        document.addEventListener('DOMContentLoaded', () => {
-            const homePage = document.getElementById('home-page');
-            const quizContainer = document.getElementById('quiz-container');
-            const quizNav = document.getElementById('quiz-nav');
-            const storyTitle = document.getElementById('story-title');
-            const storyContent = document.getElementById('story-content');
-            const storyDisplay = document.getElementById('story-display');
-            const questionsSection = document.getElementById('questions-section');
-            const submitSection = document.getElementById('submit-section');
-            const continueBtn = document.getElementById('continue-to-quiz');
-            const submitBtn = document.getElementById('submit-btn');
-            const results = document.getElementById('results');
-            const score = document.getElementById('score');
-            const feedback = document.getElementById('feedback');
-            const tryAnotherBtn = document.getElementById('try-another');
+        // Application state
+        let currentGrade = '';
+        let currentStory = '';
+        let currentQuestions = [];
+        let selectedAnswers = {};
 
-            let currentStory = '';
+        // DOM elements
+        const gradePage = document.getElementById('grade-page');
+        const storiesPage = document.getElementById('stories-page');
+        const quizContainer = document.getElementById('quiz-container');
+        const gradeTitle = document.getElementById('grade-title');
+        const storiesGrid = document.getElementById('stories-grid');
+        const storyTitle = document.getElementById('story-title');
+        const storyContent = document.getElementById('story-content');
+        const readingTip = document.getElementById('reading-tip');
+        const storyDisplay = document.getElementById('story-display');
+        const questionsSection = document.getElementById('questions-section');
+        const questionsContainer = document.getElementById('questions-container');
+        const submitBtn = document.getElementById('submit-btn');
+        const results = document.getElementById('results');
+        const score = document.getElementById('score');
+        const feedback = document.getElementById('feedback');
 
-            function showHome() {
-                homePage.classList.remove('hidden');
-                quizContainer.classList.add('hidden');
-                quizNav.classList.add('hidden');
-                
-                // Reset all sections
-                storyDisplay.classList.remove('hidden');
-                questionsSection.classList.add('hidden');
-                submitSection.classList.add('hidden');
-                results.classList.add('hidden');
-            }
-
-            function showStory(storyKey) {
-                currentStory = storyKey;
-                const story = stories[storyKey];
-                
-                // Hide home page and show quiz container
-                homePage.classList.add('hidden');
-                quizContainer.classList.remove('hidden');
-                quizNav.classList.remove('hidden');
-                
-                // Show only the story section initially
-                storyDisplay.classList.remove('hidden');
-                questionsSection.classList.add('hidden');
-                submitSection.classList.add('hidden');
-                results.classList.add('hidden');
-                
-                storyTitle.textContent = story.title;
-                storyContent.innerHTML = story.story;
-                
-                // Prepare questions but keep them hidden
-                questionsSection.innerHTML = '';
-                story.questions.forEach((q, index) => {
-                    const questionDiv = document.createElement('div');
-                    questionDiv.className = 'question-card';
-                    
-                    let optionsHtml = '';
-                    q.options.forEach((option, optIndex) => {
-                        optionsHtml += `
-                            <button class="option-button" data-question="${index}" data-option="${optIndex}">
-                                ${String.fromCharCode(65 + optIndex)}) ${option}
-                            </button>
-                        `;
-                    });
-                    
-                    questionDiv.innerHTML = `
-                        <h4 class="text-xl font-bold text-amber-700 mb-5 flex items-center">
-                            <span class="bg-amber-100 text-amber-700 rounded-full w-8 h-8 flex items-center justify-center mr-3 font-bold">
-                                ${index + 1}
-                            </span>
-                            ${q.text}
-                        </h4>
-                        ${optionsHtml}
-                    `;
-                    
-                    questionsSection.appendChild(questionDiv);
-                });
-                
-                // Reset submit button
-                submitBtn.disabled = false;
-                submitBtn.textContent = '✅ Check My Answers';
-            }
-
-            function showQuestions() {
-                // Hide story section with animation
-                storyDisplay.classList.add('fade-out');
-                
-                setTimeout(() => {
-                    storyDisplay.classList.add('hidden');
-                    storyDisplay.classList.remove('fade-out');
-                    
-                    // Show questions section with animation
-                    questionsSection.classList.remove('hidden');
-                    questionsSection.classList.add('fade-in');
-                    submitSection.classList.remove('hidden');
-                    submitSection.classList.add('fade-in');
-                    
-                    // Scroll to top of questions
-                    questionsSection.scrollIntoView({ behavior: 'smooth' });
-                }, 300);
-            }
-
-            // Event listeners for navigation
-            document.getElementById('home-btn').addEventListener('click', showHome);
-            document.getElementById('nizwa-btn').addEventListener('click', () => showStory('nizwa'));
-            document.getElementById('desert-btn').addEventListener('click', () => showStory('desert'));
-            document.getElementById('mosque-btn').addEventListener('click', () => showStory('mosque'));
-
-            // Event listeners for home page cards
-            document.getElementById('start-nizwa').addEventListener('click', () => showStory('nizwa'));
-            document.getElementById('start-desert').addEventListener('click', () => showStory('desert'));
-            document.getElementById('start-mosque').addEventListener('click', () => showStory('mosque'));
-
-            // Continue to quiz button
-            continueBtn.addEventListener('click', showQuestions);
-
-            // Try another story button
-            tryAnotherBtn.addEventListener('click', showHome);
-
-            // Handle option selection
-            document.addEventListener('click', (e) => {
-                if (e.target.classList.contains('option-button')) {
-                    const questionIndex = e.target.dataset.question;
-                    const buttons = document.querySelectorAll(`[data-question="${questionIndex}"]`);
-                    
-                    buttons.forEach(btn => btn.classList.remove('selected'));
-                    e.target.classList.add('selected');
-                }
-            });
-
-            // Handle submit
-            submitBtn.addEventListener('click', () => {
-                const story = stories[currentStory];
-                let correctAnswers = 0;
-                let allAnswered = true;
-
-                story.questions.forEach((q, index) => {
-                    const selectedBtn = document.querySelector(`[data-question="${index}"].selected`);
-                    
-                    if (!selectedBtn) {
-                        allAnswered = false;
-                        return;
-                    }
-
-                    const selectedOption = parseInt(selectedBtn.dataset.option);
-                    const buttons = document.querySelectorAll(`[data-question="${index}"]`);
-                    
-                    // Disable all buttons
-                    buttons.forEach(btn => btn.style.pointerEvents = 'none');
-                    
-                    // Show correct/incorrect
-                    if (selectedOption === q.correct) {
-                        correctAnswers++;
-                        selectedBtn.classList.add('correct');
-                    } else {
-                        selectedBtn.classList.add('incorrect');
-                        // Highlight correct answer
-                        buttons[q.correct].classList.add('correct');
-                    }
-                });
-
-                if (!allAnswered) {
-                    alert('Please answer all questions first! 📝');
-                    return;
-                }
-
-                // Show results
-                const percentage = Math.round((correctAnswers / story.questions.length) * 100);
-                score.textContent = `${correctAnswers}/${story.questions.length} (${percentage}%)`;
-                
-                if (percentage === 100) {
-                    feedback.textContent = '🌟 Perfect! You are amazing!';
-                    feedback.className = 'text-lg mt-2 text-green-600';
-                } else if (percentage >= 80) {
-                    feedback.textContent = '👏 Great job! You did very well!';
-                    feedback.className = 'text-lg mt-2 text-blue-600';
-                } else if (percentage >= 60) {
-                    feedback.textContent = '👍 Good work! Keep practicing!';
-                    feedback.className = 'text-lg mt-2 text-yellow-600';
-                } else {
-                    feedback.textContent = '💪 Keep trying! Read the story again!';
-                    feedback.className = 'text-lg mt-2 text-orange-600';
-                }
-                
-                results.classList.remove('hidden');
-                results.classList.add('fade-in');
-                submitBtn.disabled = true;
-                submitBtn.textContent = '✅ Answers Checked';
-                
-                // Scroll to results
-                results.scrollIntoView({ behavior: 'smooth' });
-            });
-
-            // Start with home page
-            showHome();
+        // Initialize app
+        document.addEventListener('DOMContentLoaded', function() {
+            setupEventListeners();
+            showGradePage();
         });
+
+        function setupEventListeners() {
+            // Grade selection - FIXED: Now correctly maps to the right grade
+            document.getElementById('select-grade-1').addEventListener('click', () => selectGrade(1));
+            document.getElementById('select-grade-2').addEventListener('click', () => selectGrade(2));
+            document.getElementById('select-grade-3').addEventListener('click', () => selectGrade(3));
+            document.getElementById('select-grade-4').addEventListener('click', () => selectGrade(4));
+
+            // Navigation buttons
+            document.getElementById('back-to-grades').addEventListener('click', showGradePage);
+            document.getElementById('back-to-stories').addEventListener('click', showStoriesPage);
+            document.getElementById('continue-to-quiz').addEventListener('click', showQuestions);
+            document.getElementById('submit-btn').addEventListener('click', submitAnswers);
+            document.getElementById('try-another-story').addEventListener('click', showStoriesPage);
+            document.getElementById('change-grade').addEventListener('click', showGradePage);
+
+            // Answer selection
+            document.addEventListener('click', function(e) {
+                if (e.target.classList.contains('option-button')) {
+                    selectAnswer(e.target);
+                }
+            });
+        }
+
+        function showGradePage() {
+            gradePage.classList.remove('hidden');
+            storiesPage.classList.add('hidden');
+            quizContainer.classList.add('hidden');
+            gradePage.classList.add('fade-in');
+        }
+
+        function selectGrade(grade) {
+            currentGrade = `grade${grade}`;
+            showStoriesPage();
+        }
+
+        function showStoriesPage() {
+            const gradeData = allStories[currentGrade];
+            
+            gradePage.classList.add('hidden');
+            storiesPage.classList.remove('hidden');
+            quizContainer.classList.add('hidden');
+            
+            gradeTitle.textContent = gradeData.title;
+            
+            // Clear and populate stories
+            storiesGrid.innerHTML = '';
+            
+            const storyKeys = Object.keys(gradeData.stories);
+            const colors = ['purple', 'blue', 'green', 'orange', 'red'];
+            const icons = ['🏰', '🌊', '🕌', '🏺', '🌟', '⛵', '💧', '👑', '🏨'];
+            
+            storyKeys.forEach((storyKey, index) => {
+                const story = gradeData.stories[storyKey];
+                const color = colors[index % colors.length];
+                const icon = icons[index % icons.length];
+                
+                const storyCard = document.createElement('div');
+                storyCard.className = 'story-card';
+                
+                storyCard.innerHTML = `
+                    <div class="h-24 ${color === 'purple' ? 'bg-gradient-to-br from-purple-400 to-purple-600' : 
+                                     color === 'blue' ? 'bg-gradient-to-br from-blue-400 to-blue-600' :
+                                     color === 'green' ? 'bg-gradient-to-br from-green-400 to-green-600' :
+                                     color === 'orange' ? 'bg-gradient-to-br from-orange-400 to-orange-600' :
+                                     'bg-gradient-to-br from-red-400 to-red-600'} flex items-center justify-center">
+                        <span class="text-4xl">${icon}</span>
+                    </div>
+                    <div class="p-4 text-center">
+                        <h3 class="text-lg font-bold ${color === 'purple' ? 'text-purple-700' : 
+                                                     color === 'blue' ? 'text-blue-700' :
+                                                     color === 'green' ? 'text-green-700' :
+                                                     color === 'orange' ? 'text-orange-700' :
+                                                     'text-red-700'} mb-2">${story.title}</h3>
+                        <button class="w-full ${color === 'purple' ? 'bg-gradient-to-r from-purple-500 to-purple-600 hover:from-purple-600 hover:to-purple-700' : 
+                                               color === 'blue' ? 'bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700' :
+                                               color === 'green' ? 'bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700' :
+                                               color === 'orange' ? 'bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700' :
+                                               'bg-gradient-to-r from-red-500 to-red-600 hover:from-red-600 hover:to-red-700'} text-white py-2 px-4 rounded-full font-semibold transition-all duration-300">
+                            Read Story
+                        </button>
+                    </div>
+                `;
+                
+                storyCard.addEventListener('click', () => selectStory(storyKey));
+                storiesGrid.appendChild(storyCard);
+            });
+            
+            storiesPage.classList.add('fade-in');
+        }
+
+        function selectStory(storyKey) {
+            currentStory = storyKey;
+            const gradeData = allStories[currentGrade];
+            const story = gradeData.stories[storyKey];
+            
+            storiesPage.classList.add('hidden');
+            quizContainer.classList.remove('hidden');
+            
+            // Set up story content
+            storyTitle.textContent = story.title;
+            storyContent.innerHTML = story.content;
+            storyContent.className = `text-gray-700 ${gradeData.textClass}`;
+            readingTip.textContent = gradeData.readingTip;
+            
+            // Prepare questions
+            currentQuestions = story.questions;
+            selectedAnswers = {};
+            
+            // Show only story section initially
+            storyDisplay.classList.remove('hidden');
+            questionsSection.classList.add('hidden');
+            results.classList.add('hidden');
+            
+            quizContainer.classList.add('fade-in');
+        }
+
+        function showQuestions() {
+            storyDisplay.classList.add('hidden');
+            questionsSection.classList.remove('hidden');
+            
+            // Generate questions
+            questionsContainer.innerHTML = '';
+            
+            currentQuestions.forEach((question, qIndex) => {
+                const questionDiv = document.createElement('div');
+                questionDiv.className = 'question-card';
+                
+                let optionsHtml = '';
+                question.options.forEach((option, oIndex) => {
+                    optionsHtml += `
+                        <button class="option-button" data-question="${qIndex}" data-option="${oIndex}">
+                            ${String.fromCharCode(65 + oIndex)}) ${option}
+                        </button>
+                    `;
+                });
+                
+                questionDiv.innerHTML = `
+                    <h4 class="text-xl font-bold text-amber-700 mb-4 flex items-center">
+                        <span class="bg-amber-100 text-amber-700 rounded-full w-8 h-8 flex items-center justify-center mr-3 font-bold text-sm">
+                            ${qIndex + 1}
+                        </span>
+                        ${question.text}
+                    </h4>
+                    ${optionsHtml}
+                `;
+                
+                questionsContainer.appendChild(questionDiv);
+            });
+            
+            submitBtn.disabled = false;
+            submitBtn.textContent = '✅ Submit Answers';
+        }
+
+        function selectAnswer(button) {
+            const questionIndex = parseInt(button.dataset.question);
+            const optionIndex = parseInt(button.dataset.option);
+            
+            // Remove selection from other options in the same question
+            const allOptionsForQuestion = document.querySelectorAll(`[data-question="${questionIndex}"]`);
+            allOptionsForQuestion.forEach(opt => opt.classList.remove('selected'));
+            
+            // Select the clicked option
+            button.classList.add('selected');
+            selectedAnswers[questionIndex] = optionIndex;
+        }
+
+        function submitAnswers() {
+            // Check if all questions are answered
+            if (Object.keys(selectedAnswers).length !== currentQuestions.length) {
+                alert('Please answer all questions before submitting! 📝');
+                return;
+            }
+            
+            let correctCount = 0;
+            
+            // Check answers and update UI
+            currentQuestions.forEach((question, qIndex) => {
+                const userAnswer = selectedAnswers[qIndex];
+                const correctAnswer = question.correct;
+                const allOptionsForQuestion = document.querySelectorAll(`[data-question="${qIndex}"]`);
+                
+                // Disable all buttons
+                allOptionsForQuestion.forEach(opt => {
+                    opt.style.pointerEvents = 'none';
+                    opt.classList.remove('selected');
+                });
+                
+                if (userAnswer === correctAnswer) {
+                    correctCount++;
+                    allOptionsForQuestion[userAnswer].classList.add('correct');
+                } else {
+                    allOptionsForQuestion[userAnswer].classList.add('incorrect');
+                    allOptionsForQuestion[correctAnswer].classList.add('correct');
+                }
+            });
+            
+            // Show results
+            const percentage = Math.round((correctCount / currentQuestions.length) * 100);
+            score.textContent = `${correctCount}/${currentQuestions.length} (${percentage}%)`;
+            
+            let feedbackText = '';
+            let feedbackClass = '';
+            
+            if (percentage === 100) {
+                feedbackText = '🌟 Outstanding! Perfect score! You\'re an excellent reader!';
+                feedbackClass = 'text-green-200';
+            } else if (percentage >= 80) {
+                feedbackText = '🎉 Great job! You understood the story very well!';
+                feedbackClass = 'text-blue-200';
+            } else if (percentage >= 60) {
+                feedbackText = '👍 Good work! Keep practicing your reading skills!';
+                feedbackClass = 'text-yellow-200';
+            } else {
+                feedbackText = '💪 Keep trying! Read the story again and you\'ll do better!';
+                feedbackClass = 'text-orange-200';
+            }
+            
+            feedback.textContent = feedbackText;
+            feedback.className = `text-lg mt-3 ${feedbackClass}`;
+            
+            results.classList.remove('hidden');
+            results.classList.add('fade-in');
+            
+            submitBtn.disabled = true;
+            submitBtn.textContent = '✅ Answers Submitted';
+            
+            // Scroll to results
+            results.scrollIntoView({ behavior: 'smooth' });
+        }
     </script>
 </body>
 </html>
